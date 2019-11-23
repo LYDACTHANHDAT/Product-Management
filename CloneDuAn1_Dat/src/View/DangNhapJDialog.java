@@ -5,22 +5,60 @@
  */
 package View;
 
-
+import DAO.NhanVienDAO;
+import Helper.DialogHelper;
+import Helper.ShareHelper;
+import model.NhanVien;
 
 /**
  *
  * @author admin
  */
 public class DangNhapJDialog extends javax.swing.JDialog {
-    
-
+    NhanVienDAO dao = new NhanVienDAO();
+    /**
+     * Creates new form DangNhapJDialog
+     */
     public DangNhapJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
     }
     
- 
+    void login(){
+        String manv = txtTendangnhap.getText();
+        String matKhau = new String(txtMatkhau.getPassword());
+        try {
+            NhanVien nhanVien = dao.findById(manv);
+            if (nhanVien != null) {
+                String matKhau2 = nhanVien.getMatKhau();
+                if (matKhau.equals(matKhau2)) {
+                    ShareHelper.USER = nhanVien;
+                    this.dispose();
+                } else {
+                    DialogHelper.alert(this, "Sai mật khẩu!");
+                }
+            } else {
+                DialogHelper.alert(this, "Sai tên đăng nhập!");
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    void exit() {
+        if (DialogHelper.confirm(this, "Bạn có muốn thoát khỏi ứng dụng không?")) {
+            System.exit(0);
+        }
+    }
+    
+    public boolean isvalid(){
+        if(txtTendangnhap.getText().length() == 0){
+            DialogHelper.alert(this, "Vui lòng nhập tên đăng nhập!");
+            return false;
+        }
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +85,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         pnlForm.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/logo-small.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Logoduan1.jpg"))); // NOI18N
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(0, 102, 51));
@@ -76,36 +114,31 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         pnlFormLayout.setHorizontalGroup(
             pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTendangnhap)
+                    .addComponent(txtMatkhau)
                     .addGroup(pnlFormLayout.createSequentialGroup()
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTendangnhap)
-                            .addComponent(txtMatkhau)
+                            .addComponent(lblTitle)
+                            .addComponent(lblTendangnhap)
+                            .addComponent(lblMatkhau)
                             .addGroup(pnlFormLayout.createSequentialGroup()
-                                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTendangnhap)
-                                    .addComponent(lblMatkhau)
-                                    .addGroup(pnlFormLayout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addComponent(btnDangnhap)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnKetthuc)))
-                                .addGap(0, 56, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(pnlFormLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(lblTitle)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btnDangnhap)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnKetthuc)))
+                        .addGap(0, 80, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlFormLayout.setVerticalGroup(
             pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormLayout.createSequentialGroup()
-                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormLayout.createSequentialGroup()
-                        .addContainerGap()
+                .addContainerGap()
+                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addGroup(pnlFormLayout.createSequentialGroup()
                         .addComponent(lblTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTendangnhap)
@@ -119,7 +152,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDangnhap)
                             .addComponent(btnKetthuc))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,7 +163,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -143,7 +176,9 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
     private void btnDangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangnhapActionPerformed
         // TODO add your handling code here:
-      
+        if (this.isvalid()) {
+            login();
+        }
     }//GEN-LAST:event_btnDangnhapActionPerformed
 
     /**
@@ -171,8 +206,6 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DangNhapJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

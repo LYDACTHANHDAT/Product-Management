@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dao;
+package DAO;
 
-import model.Product;
+
 import Helper.JdbcHelper;
+import Model.SanPham;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ import java.util.List;
  *
  * @author ASUS
  */
-public class ProductDAO {
-    public void insert(Product model){
-        String sql="INSERT INTO SanPham (MaSp, TenSp, SoLuong, DonGia, MADM, NgayNhap, NhaCC) VALUES (?, ?, ?, ?, ?, ?, ?)";
+public class SanPhamDAO {
+    public void insert(SanPham model){
+        String sql="INSERT INTO SanPham (MaSp, TenSp, SoLuong, DonGia, MADM, NgayNhap, NhaCC, MoTa) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         JdbcHelper.executeUpdate(sql,
                 model.getMaSP(),
                 model.getTenSP(),
@@ -25,11 +26,12 @@ public class ProductDAO {
                 model.getDonGia(),
                 model.getMaDM(),
                 model.getNgayNhap(),
-                model.getNhaCC());
+                model.getNhaCC(),
+                model.getMoTa());
     } 
     
-    public void update(Product model){
-        String sql="UPDATE SanPham SET TenSp=?, SoLuong=?, DonGia=?, MADM=?, NgayNhap=?, NhaCC=? WHERE MaSp=?";
+    public void update(SanPham model){
+        String sql="UPDATE SanPham SET TenSp=?, SoLuong=?, DonGia=?, MADM=?, NgayNhap=?, NhaCC=? MoTa=?WHERE MaSp=?";
         JdbcHelper.executeUpdate(sql,
                 model.getTenSP(),
                 model.getSoLuong(),
@@ -37,6 +39,7 @@ public class ProductDAO {
                 model.getMaDM(),
                 model.getNgayNhap(),
                 model.getNhaCC(),
+                model.getMoTa(),
                 model.getMaSP());
     }
     
@@ -44,28 +47,28 @@ public class ProductDAO {
          String sql="DELETE FROM SanPham WHERE MaSp=?";
          JdbcHelper.executeUpdate(sql, id);
      }
-     public List<Product> select(){
+     public List<SanPham> select(){
          String sql="SELECT * FROM SanPham";
          return select(sql);
      }
-     public List<Product> selectByKeyword(String keyword){
+     public List<SanPham> selectByKeyword(String keyword){
          String sql="SELECT * FROM SanPham WHERE TenSp LIKE ?";
          return select(sql, "%"+keyword+"%");
      }
      
-      public Product findById(String manh){
+      public SanPham findById(String manh){
           String sql="SELECT * FROM SanPham WHERE MaSp=?";
-          List<Product> list = select(sql, manh);
+          List<SanPham> list = select(sql, manh);
           return list.size() > 0 ? list.get(0) : null;
       }
-      private List<Product> select(String sql, Object...args){
-          List<Product> list=new ArrayList<>();
+      private List<SanPham> select(String sql, Object...args){
+          List<SanPham> list=new ArrayList<>();
           try {
               ResultSet rs = null;
               try {
                   rs = JdbcHelper.executeQuery(sql, args);
                   while(rs.next()){
-                      Product model=readFromResultSet(rs);
+                      SanPham model=readFromResultSet(rs);
                       list.add(model);
                   }
               }
@@ -76,8 +79,8 @@ public class ProductDAO {
               throw new RuntimeException(ex);
           }         return list;
       }
-      private Product readFromResultSet(ResultSet rs) throws SQLException{
-          Product model=new Product();
+      private SanPham readFromResultSet(ResultSet rs) throws SQLException{
+          SanPham model=new SanPham();
           model.setMaSP(rs.getString("MaSP"));
           model.setTenSP(rs.getString("TenSp"));
           model.setSoLuong(rs.getInt("SoLuong"));

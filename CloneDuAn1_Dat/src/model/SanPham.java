@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package Model;
+
 
 import Helper.DateHelper;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author ASUS
  */
-public class Product {
+public class SanPham {
      private String maSP;
      private String tenSP;
      private int soLuong;
@@ -20,18 +21,19 @@ public class Product {
      private String maDM;
      private Date ngayNhap = DateHelper.now();
      private String nhaCC;
+     private String moTa;
 
-    public Product() {
+    public SanPham() {
     }
 
-    public Product(String maSP, String tenSP, int soLuong, int donGia, String maDM, Date ngayNhap, String nhaCC) {
+    public SanPham(String maSP, String tenSP, int soLuong, int donGia, String maDM, String nhaCC, String moTa) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.maDM = maDM;
-        this.ngayNhap = ngayNhap;
         this.nhaCC = nhaCC;
+        this.moTa = moTa;
     }
 
     public String getMaSP() {
@@ -89,6 +91,13 @@ public class Product {
     public void setNhaCC(String nhaCC) {
         this.nhaCC = nhaCC;
     }
-     
-     
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
 }

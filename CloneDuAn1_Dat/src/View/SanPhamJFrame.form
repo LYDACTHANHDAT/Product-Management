@@ -51,9 +51,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="lblMota3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="txtNhaCungCap" pref="358" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="lblMachuyende" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtMachuyende" pref="351" max="32767" attributes="0"/>
+                          <Component id="txtMaSanPham" min="-2" pref="358" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -62,13 +67,13 @@
                               <Component id="lblHocphi" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtThoiluong1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtTenchuyende" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="txtSoLuong" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  <Component id="txtTenchuyende1" pref="351" max="32767" attributes="0"/>
+                                  <Component id="txtTenSanPham" pref="362" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="txtDonGia" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -79,13 +84,13 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtHocphi" min="-2" pref="350" max="-2" attributes="0"/>
-                              <Component id="txtHocphi1" min="-2" pref="350" max="-2" attributes="0"/>
-                              <Component id="txtHocphi2" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                              <Component id="txtMaDanhMuc" max="32767" attributes="0"/>
+                              <Component id="txtMoTa" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtNgayNhap" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
@@ -110,11 +115,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="btnInsert" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="btnClear" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -127,47 +132,43 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblMachuyende" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtMachuyende" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtTenchuyende1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTenSanPham" min="-2" max="-2" attributes="0"/>
                               <Component id="lblTenchuyende" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblThoiluong" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTenchuyende" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtThoiluong1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDonGia" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblHocphi" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblMota" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtHocphi" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaDanhMuc" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblMota1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtHocphi1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNgayNhap" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jScrollPane2" min="-2" pref="186" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="lblMota2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnFirst" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -175,20 +176,29 @@
                               <Component id="btnNext" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnLast" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="txtHocphi2" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblMota3" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNhaCungCap" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txtMoTa" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="lblMota2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnInsert" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnClear" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -202,7 +212,7 @@
             <Property name="text" type="java.lang.String" value="M&#xe3; S&#x1ea3;n Ph&#x1ea9;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtMachuyende">
+        <Component class="javax.swing.JTextField" name="txtMaSanPham">
         </Component>
         <Component class="javax.swing.JLabel" name="lblTenchuyende">
           <Properties>
@@ -212,7 +222,7 @@
             <Property name="text" type="java.lang.String" value="T&#xea;n S&#x1ea3;n Ph&#x1ea9;m"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTenchuyende">
+        <Component class="javax.swing.JTextField" name="txtSoLuong">
         </Component>
         <Component class="javax.swing.JLabel" name="lblThoiluong">
           <Properties>
@@ -230,9 +240,9 @@
             <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHocphi">
+        <Component class="javax.swing.JTextField" name="txtMaDanhMuc">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHocphiActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaDanhMucActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblMota">
@@ -249,7 +259,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/duan1/imgs/Add.png"/>
+              <Image iconType="3" name="/picture/Alarm.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
           </Properties>
@@ -263,7 +273,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/duan1/imgs/Edit.png"/>
+              <Image iconType="3" name="/picture/Bar chart.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
@@ -277,7 +287,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/duan1/imgs/Delete.png"/>
+              <Image iconType="3" name="/picture/Bar chart.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
           </Properties>
@@ -291,7 +301,7 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/duan1/imgs/Text.png"/>
+              <Image iconType="3" name="/picture/Certificate.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
           </Properties>
@@ -355,9 +365,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtThoiluong1">
+        <Component class="javax.swing.JTextField" name="txtDonGia">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTenchuyende1">
+        <Component class="javax.swing.JTextField" name="txtTenSanPham">
         </Component>
         <Component class="javax.swing.JLabel" name="lblMota1">
           <Properties>
@@ -375,14 +385,14 @@
             <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHocphi1">
+        <Component class="javax.swing.JTextField" name="txtNgayNhap">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHocphi1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgayNhapActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtHocphi2">
+        <Component class="javax.swing.JTextField" name="txtMoTa">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHocphi2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMoTaActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -401,13 +411,14 @@
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="7" rowCount="10">
+                  <Table columnCount="8" rowCount="10">
                     <Column editable="true" title="M&#xc3; S&#x1ea2;N PH&#x1ea8;M" type="java.lang.Object"/>
                     <Column editable="true" title="T&#xca;N S&#x1ea2;N PH&#x1ea8;M" type="java.lang.Object"/>
                     <Column editable="true" title="S&#x1ed0; L&#x1af;&#x1ee2;NG" type="java.lang.Object"/>
                     <Column editable="true" title="&#x110;&#x1a0;N GI&#xc1;" type="java.lang.Object"/>
                     <Column editable="true" title="M&#xc3; DANH M&#x1ee4;C" type="java.lang.Object"/>
                     <Column editable="true" title="NG&#xc0;Y NH&#x1eac;P" type="java.lang.Object"/>
+                    <Column editable="true" title="NH&#xc0; CUNG C&#x1ea4;P" type="java.lang.Object"/>
                     <Column editable="true" title="M&#xd4; T&#x1ea2;" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -430,10 +441,23 @@
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/duan1/imgs/Computer.png"/>
+              <Image iconType="3" name="/picture/Alarm.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="QU&#x1ea2;N L&#xdd; S&#x1ea2;N PH&#x1ea8;M"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMota3">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Nh&#xe0; Cung c&#x1ea5;p"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtNhaCungCap">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNhaCungCapActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
