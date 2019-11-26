@@ -1,6 +1,6 @@
 package Helper;
 
-import model.NhanVien;
+import Model.NhanVien;
 import java.awt.Image;
 import java.io.File;
 import java.nio.file.Files;
@@ -14,7 +14,7 @@ public class ShareHelper {
     public static final Image APP_ICON;
 
     static {
-        String file = "/picture/logo.png";
+        String file = "/picture/logo-small.jpg";
         APP_ICON = new ImageIcon(ShareHelper.class.getResource(file)).getImage();
     }
     
