@@ -1,13 +1,19 @@
 
 package View;
 
-import DAO.SanPhamDAO;
+
+import Dao.DanhMucDAO;
+import Dao.SanPhamDAO;
 import Helper.DateHelper;
 import Helper.DialogHelper;
+import Helper.JdbcHelper;
 import Helper.ShareHelper;
-import Model.SanPham;
+import java.sql.ResultSet;
+import model.SanPham;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import model.DanhMuc;
 
 
 /**
@@ -17,14 +23,21 @@ import javax.swing.table.DefaultTableModel;
 public class SanPhamJFrame extends javax.swing.JFrame {
 
     int index = 0;
+    DanhMucDAO dmdao = new DanhMucDAO();
     SanPhamDAO dao = new SanPhamDAO();
-    
     public SanPhamJFrame() {
         initComponents();
         setLocationRelativeTo(null);
         windowOpened();
+        init();
+        this.loadDataToCbo();
         
     }
+    
+        void init() {
+        setIconImage(ShareHelper.APP_ICON);
+    }
+    
     
     
     void windowOpened(){
@@ -62,7 +75,19 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         }
     }
     
+       
 
+    public void loadDataToCbo() {
+        try {
+            String sql = "select MaDM from DanhMuc";
+            ResultSet rs = JdbcHelper.executeQuery(sql);
+            while (rs.next()) {
+                cboDanhMuc.addItem(rs.getString("MaDM"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     void insert() {
         SanPham model = getModel();
@@ -108,8 +133,8 @@ public class SanPhamJFrame extends javax.swing.JFrame {
 
     void edit() {
         try {
-            String macd = (String) tblGridView.getValueAt(this.index, 0);
-            SanPham model = dao.findById(macd);
+            String masp = (String) tblGridView.getValueAt(this.index, 0);
+            SanPham model = dao.findById(masp);
             if (model != null) {
                 this.setModel(model);
                 this.setStatus(false);
@@ -124,7 +149,6 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         txtTenSanPham.setText(model.getTenSP());
         txtSoLuong.setText(String.valueOf(model.getSoLuong()));
         txtDonGia.setText(String.valueOf(model.getDonGia()));
-        txtMaDanhMuc.setText(model.getMaDM());
         txtNgayNhap.setText(DateHelper.toString(model.getNgayNhap()));
         txtNhaCungCap.setText(model.getNhaCC());
         txtMoTa.setText(model.getMoTa());
@@ -134,10 +158,10 @@ public class SanPhamJFrame extends javax.swing.JFrame {
     SanPham getModel() {
         SanPham model = new SanPham();
         model.setMaSP(txtMaSanPham.getText());
-        model.setTenSP(txtSoLuong.getText());
+        model.setTenSP(txtTenSanPham.getText());
         model.setSoLuong(Integer.valueOf(txtSoLuong.getText()));
         model.setDonGia(Integer.valueOf(txtDonGia.getText()));
-        model.setMaDM(txtMaDanhMuc.getText());
+        model.setMaDM(cboDanhMuc.getSelectedItem().toString());
         model.setNgayNhap(DateHelper.toDate(txtNgayNhap.getText()));
         model.setNhaCC(txtNhaCungCap.getText());
         model.setMoTa(txtMoTa.getText());
@@ -169,7 +193,6 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         txtSoLuong = new javax.swing.JTextField();
         lblThoiluong = new javax.swing.JLabel();
         lblHocphi = new javax.swing.JLabel();
-        txtMaDanhMuc = new javax.swing.JTextField();
         lblMota = new javax.swing.JLabel();
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -190,6 +213,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblMota3 = new javax.swing.JLabel();
         txtNhaCungCap = new javax.swing.JTextField();
+        cboDanhMuc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("QUẢN LÝ SẢN PHẨM");
@@ -207,12 +231,6 @@ public class SanPhamJFrame extends javax.swing.JFrame {
 
         lblHocphi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblHocphi.setText("Đơn giá");
-
-        txtMaDanhMuc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaDanhMucActionPerformed(evt);
-            }
-        });
 
         lblMota.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblMota.setText("Mã Danh Mục");
@@ -336,7 +354,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Brick house.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Full basket.png"))); // NOI18N
         jLabel1.setText("QUẢN LÝ SẢN PHẨM");
 
         lblMota3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -345,6 +363,13 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         txtNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNhaCungCapActionPerformed(evt);
+            }
+        });
+
+        cboDanhMuc.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        cboDanhMuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDanhMucActionPerformed(evt);
             }
         });
 
@@ -382,9 +407,9 @@ public class SanPhamJFrame extends javax.swing.JFrame {
                             .addComponent(lblMota2))
                         .addGap(18, 18, 18)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaDanhMuc)
                             .addComponent(txtMoTa, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNgayNhap, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(txtNgayNhap, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cboDanhMuc, 0, 362, Short.MAX_VALUE))))
                 .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEditLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -439,10 +464,10 @@ public class SanPhamJFrame extends javax.swing.JFrame {
                             .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblHocphi))
                         .addGap(18, 18, 18)
-                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMota)
-                            .addComponent(txtMaDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                            .addComponent(cboDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
                         .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMota1)
                             .addComponent(txtNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -530,10 +555,6 @@ public class SanPhamJFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnInsertActionPerformed
 
-    private void txtMaDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDanhMucActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaDanhMucActionPerformed
-
     private void txtNgayNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNgayNhapActionPerformed
@@ -554,6 +575,11 @@ public class SanPhamJFrame extends javax.swing.JFrame {
     private void txtNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhaCungCapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNhaCungCapActionPerformed
+
+    private void cboDanhMucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDanhMucActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboDanhMucActionPerformed
 
     /**
      * @param args the command line arguments
@@ -584,6 +610,10 @@ public class SanPhamJFrame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -602,6 +632,7 @@ public class SanPhamJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cboDanhMuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblHocphi;
@@ -615,7 +646,6 @@ public class SanPhamJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEdit;
     private javax.swing.JTable tblGridView;
     private javax.swing.JTextField txtDonGia;
-    private javax.swing.JTextField txtMaDanhMuc;
     private javax.swing.JTextField txtMaSanPham;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtNgayNhap;

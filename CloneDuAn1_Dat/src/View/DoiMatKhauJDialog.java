@@ -3,54 +3,22 @@ package View;
 
 import Dao.NhanVienDAO;
 import Helper.DialogHelper;
+import Helper.JdbcHelper;
 import Helper.ShareHelper;
 
 import model.NhanVien;
 
 
-public class DangNhapJDialog extends javax.swing.JDialog {
+public class DoiMatKhauJDialog extends javax.swing.JDialog {
     NhanVienDAO dao = new NhanVienDAO();
 
-    public DangNhapJDialog(java.awt.Frame parent, boolean modal) {
+    public DoiMatKhauJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setIconImage(ShareHelper.APP_ICON);
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    void login(){
-        String manv = txtTendangnhap.getText();
-        String matKhau = new String(txtMatkhau.getPassword());
-        try {
-            NhanVien nhanVien = dao.findById(manv);
-            if (nhanVien != null) {
-                String matKhau2 = nhanVien.getMatKhau();
-                if (matKhau.equals(matKhau2)) {
-                    ShareHelper.USER = nhanVien;
-                    this.dispose();
-                } else {
-                    DialogHelper.alert(this, "Sai mật khẩu!");
-                }
-            } else {
-                DialogHelper.alert(this, "Sai tên đăng nhập!");
-            }
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
-    
-    void exit() {
-        if (DialogHelper.confirm(this, "Bạn có muốn thoát khỏi ứng dụng không?")) {
-            System.exit(0);
-        }
-    }
-    
-    public boolean isvalid(){
-        if(txtTendangnhap.getText().length() == 0){
-            DialogHelper.alert(this, "Vui lòng nhập tên đăng nhập!");
-            return false;
-        }
-        return true;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,11 +33,13 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         lblTendangnhap = new javax.swing.JLabel();
-        txtTendangnhap = new javax.swing.JTextField();
+        txtCurrent = new javax.swing.JTextField();
         lblMatkhau = new javax.swing.JLabel();
-        txtMatkhau = new javax.swing.JPasswordField();
-        btnDangnhap = new javax.swing.JButton();
+        txtNewPass = new javax.swing.JPasswordField();
+        btnChangeAction = new javax.swing.JButton();
         btnKetthuc = new javax.swing.JButton();
+        txtConfirm = new javax.swing.JPasswordField();
+        lblMatkhau1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -82,16 +52,16 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 102, 51));
-        lblTitle.setText("ĐĂNG NHẬP");
+        lblTitle.setText("Đổi Mật Khẩu");
 
-        lblTendangnhap.setText("Tên đăng nhập");
+        lblTendangnhap.setText("Mật khẩu hiện tại");
 
-        lblMatkhau.setText("Mật khẩu");
+        lblMatkhau.setText("Mật khẩu mới");
 
-        btnDangnhap.setText("Đăng nhập");
-        btnDangnhap.addActionListener(new java.awt.event.ActionListener() {
+        btnChangeAction.setText("Chấp nhận");
+        btnChangeAction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDangnhapActionPerformed(evt);
+                btnChangeActionActionPerformed(evt);
             }
         });
 
@@ -102,6 +72,8 @@ public class DangNhapJDialog extends javax.swing.JDialog {
             }
         });
 
+        lblMatkhau1.setText("Xác nhận mật khẩu");
+
         javax.swing.GroupLayout pnlFormLayout = new javax.swing.GroupLayout(pnlForm);
         pnlForm.setLayout(pnlFormLayout);
         pnlFormLayout.setHorizontalGroup(
@@ -110,17 +82,19 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTendangnhap)
-                    .addComponent(txtMatkhau)
+                    .addComponent(txtCurrent)
+                    .addComponent(txtNewPass)
+                    .addComponent(txtConfirm, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlFormLayout.createSequentialGroup()
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitle)
                             .addComponent(lblTendangnhap)
                             .addComponent(lblMatkhau)
                             .addGroup(pnlFormLayout.createSequentialGroup()
-                                .addComponent(btnDangnhap)
+                                .addComponent(btnChangeAction)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnKetthuc)))
+                                .addComponent(btnKetthuc))
+                            .addComponent(lblMatkhau1))
                         .addGap(0, 46, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -132,16 +106,20 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTendangnhap)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTendangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMatkhau)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMatkhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(txtNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(lblMatkhau1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDangnhap)
+                    .addComponent(btnChangeAction)
                     .addComponent(btnKetthuc))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
             .addGroup(pnlFormLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -163,15 +141,29 @@ public class DangNhapJDialog extends javax.swing.JDialog {
 
     private void btnKetthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetthucActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        Main main = new Main();
+        main.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnKetthucActionPerformed
 
-    private void btnDangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangnhapActionPerformed
-        // TODO add your handling code here:
-        if (this.isvalid()) {
-            login();
+    private void btnChangeActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionActionPerformed
+        
+        String pass = ShareHelper.USER.getMatKhau();
+        String newPass = txtNewPass.getText();
+        String confirm = txtConfirm.getText();
+        if (txtCurrent.getText().equalsIgnoreCase(pass)){
+            if(newPass.equalsIgnoreCase(confirm)){
+                String maNV = ShareHelper.USER.getMaNV();
+                String sql = "update NhanVien set matKhau=? where maNhanVien=?";
+                JdbcHelper.executeQuery(sql, newPass, maNV);
+                DialogHelper.alert(this, "Đã đổi mật khẩu!");
+            }else{
+                DialogHelper.alert(this, "Đổi mật khẩu thất bại!");
+            }
+        }else{
+                DialogHelper.alert(this, "Mật khẩu hiện tại không đúng!");
         }
-    }//GEN-LAST:event_btnDangnhapActionPerformed
+    }//GEN-LAST:event_btnChangeActionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,14 +182,18 @@ public class DangNhapJDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DangNhapJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DangNhapJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DangNhapJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DangNhapJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoiMatKhauJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -206,7 +202,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DangNhapJDialog dialog = new DangNhapJDialog(new javax.swing.JFrame(), true);
+                DoiMatKhauJDialog dialog = new DoiMatKhauJDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -219,14 +215,16 @@ public class DangNhapJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDangnhap;
+    private javax.swing.JButton btnChangeAction;
     private javax.swing.JButton btnKetthuc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblMatkhau;
+    private javax.swing.JLabel lblMatkhau1;
     private javax.swing.JLabel lblTendangnhap;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JPanel pnlForm;
-    private javax.swing.JPasswordField txtMatkhau;
-    private javax.swing.JTextField txtTendangnhap;
+    private javax.swing.JPasswordField txtConfirm;
+    private javax.swing.JTextField txtCurrent;
+    private javax.swing.JPasswordField txtNewPass;
     // End of variables declaration//GEN-END:variables
 }

@@ -53,18 +53,20 @@
                   <Component id="jLabel1" min="-2" pref="142" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtTendangnhap" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtMatkhau" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCurrent" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNewPass" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtConfirm" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                               <Component id="lblTendangnhap" min="-2" max="-2" attributes="0"/>
                               <Component id="lblMatkhau" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnDangnhap" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnChangeAction" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnKetthuc" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="lblMatkhau1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
                       </Group>
@@ -81,17 +83,21 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblTendangnhap" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtTendangnhap" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCurrent" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblMatkhau" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtMatkhau" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="txtNewPass" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <Component id="lblMatkhau1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtConfirm" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnDangnhap" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnChangeAction" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnKetthuc" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel1" max="32767" attributes="0"/>
@@ -117,29 +123,29 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="66" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x102;NG NH&#x1eac;P"/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i M&#x1ead;t Kh&#x1ea9;u"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblTendangnhap">
           <Properties>
-            <Property name="text" type="java.lang.String" value="T&#xea;n &#x111;&#x103;ng nh&#x1ead;p"/>
+            <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u hi&#x1ec7;n t&#x1ea1;i"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTendangnhap">
+        <Component class="javax.swing.JTextField" name="txtCurrent">
         </Component>
         <Component class="javax.swing.JLabel" name="lblMatkhau">
           <Properties>
-            <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u"/>
+            <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u m&#x1edb;i"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtMatkhau">
+        <Component class="javax.swing.JPasswordField" name="txtNewPass">
         </Component>
-        <Component class="javax.swing.JButton" name="btnDangnhap">
+        <Component class="javax.swing.JButton" name="btnChangeAction">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng nh&#x1ead;p"/>
+            <Property name="text" type="java.lang.String" value="Ch&#x1ea5;p nh&#x1ead;n"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDangnhapActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeActionActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnKetthuc">
@@ -149,6 +155,13 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKetthucActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtConfirm">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblMatkhau1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="X&#xe1;c nh&#x1ead;n m&#x1ead;t kh&#x1ea9;u"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

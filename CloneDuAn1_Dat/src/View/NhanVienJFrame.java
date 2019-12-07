@@ -1,53 +1,34 @@
-
 package View;
 
-
-import DAO.NhanVienDAO;
+import Dao.NhanVienDAO;
 import Helper.DialogHelper;
 import Helper.ShareHelper;
-import Model.NhanVien;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-
+import model.NhanVien;
 
 public class NhanVienJFrame extends javax.swing.JFrame {
-    int index =0;
+
+    int index = 0;
     NhanVienDAO dao = new NhanVienDAO();
-    
+
     public NhanVienJFrame() {
         initComponents();
         setLocationRelativeTo(null);
         windowOpened();
         init();
     }
-      void init(){
-        setIconImage(ShareHelper.APP_ICON);
-    
-    }
-        public boolean isvalid() {
-        if (txtManhanvien.getText().length() == 0) {
-            DialogHelper.alert(this, "Vui lòng nhập mã nhân viên!");
+
+    public boolean isValidInsert() {
+        if (!ShareHelper.USER.isVaiTro()) {
+            DialogHelper.alert(this, "Không được phép thêm");
             return false;
         }
-        if (txtMatKhau.getPassword().length < 3) {
-            DialogHelper.alert(this, "Mật khẩu phải có ít nhất 3 ký tự!");
-            return false;
-        }
-        if(txtMatKhau.getPassword().length == 0){
-            DialogHelper.alert(this, "Vui lòng nhập mật khẩu!");
-            return false;
-        }
-        if (txtXacNhanMK.getPassword().length == 0) {
-            DialogHelper.alert(this, "Vui lòng nhập xác nhận mật khẩu!");
-            return false;
-        }
-        if (txtHoten.getText().length() == 0) {
-            DialogHelper.alert(this, "Vui lòng nhập họ tên!");
-            return false;
-        } 
         return true;
     }
-        public boolean isValidDelete() {
+        
+    public boolean isValidDelete() {
         if (!ShareHelper.USER.isVaiTro()) {
             DialogHelper.alert(this, "Không được phép xóa");
             return false;
@@ -55,7 +36,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         return true;
     }
 
-        public boolean isValidEdit() {
+    public boolean isValidEdit() {
         if (!ShareHelper.USER.isVaiTro()) {
             DialogHelper.alert(this, "Không được phép sửa");
             return false;
@@ -63,13 +44,15 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         return true;
     }
 
+    void init() {
+        setIconImage(ShareHelper.APP_ICON);
+    }
 
-    
-    void windowOpened(){
+    void windowOpened() {
         this.load();
         this.setStatus(true);
     }
-    
+
     void load() {
         DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
         model.setRowCount(0);
@@ -80,14 +63,14 @@ public class NhanVienJFrame extends javax.swing.JFrame {
                     nv.getMaNV(),
                     nv.getMatKhau(),
                     nv.getHoTen(),
-                    nv.isVaiTro()? "Quản trị" : "Nhân viên"};
-                    model.addRow(row);
+                    nv.isVaiTro() ? "Quản trị" : "Nhân viên"};
+                model.addRow(row);
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-    
+
     void insert() {
         NhanVien model = getModel();
         String confirm = new String(txtXacNhanMK.getPassword());
@@ -98,14 +81,14 @@ public class NhanVienJFrame extends javax.swing.JFrame {
                 this.clear();
                 DialogHelper.alert(this, "Thêm mới thành công!");
             } catch (Exception e) {
-                
+
                 DialogHelper.alert(this, "Thêm mới thất bại!");
             }
         } else {
             DialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
         }
     }
-    
+
     void update() {
         NhanVien model = getModel();
         String confirm = new String(txtXacNhanMK.getPassword());
@@ -148,12 +131,12 @@ public class NhanVienJFrame extends javax.swing.JFrame {
             DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-    
+
     void clear() {
         this.setModel(new NhanVien());
         this.setStatus(true);
     }
-    
+
     void setModel(NhanVien model) {
         txtManhanvien.setText(model.getMaNV());
         txtHoten.setText(model.getHoTen());
@@ -162,7 +145,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         rdoQuanTri.setSelected(model.isVaiTro());
         rdoNhanVien.setSelected(!model.isVaiTro());
     }
-    
+
     NhanVien getModel() {
         NhanVien model = new NhanVien();
         model.setMaNV(txtManhanvien.getText());
@@ -171,7 +154,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         model.setVaiTro(rdoQuanTri.isSelected());
         return model;
     }
-    
+
     void setStatus(boolean insertable) {
         txtManhanvien.setEditable(insertable);
         btnInsert.setEnabled(insertable);
@@ -258,7 +241,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         });
 
         btnUpdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Info.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Edit.png"))); // NOI18N
         btnUpdate.setText("Sửa");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +259,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         });
 
         btnClear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Lists.png"))); // NOI18N
+        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Refresh.png"))); // NOI18N
         btnClear.setText("Mới");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -481,7 +464,9 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_rdoQuanTrirdoTruongphongActionPerformed
 
     private void btnInsertbtnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertbtnInsertActionPerformed
-        insert();
+        if (this.isValidInsert()) {
+            insert();
+        }
     }//GEN-LAST:event_btnInsertbtnInsertActionPerformed
 
     private void btnUpdatebtnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatebtnUpdateActionPerformed
@@ -489,7 +474,9 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdatebtnUpdateActionPerformed
 
     private void btnDeletebtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletebtnDeleteActionPerformed
-        delete();
+        if (this.isValidDelete()) {
+            delete();
+        }
     }//GEN-LAST:event_btnDeletebtnDeleteActionPerformed
 
     private void btnClearbtnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearbtnClearActionPerformed
@@ -497,21 +484,25 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearbtnClearActionPerformed
 
     private void btnFirstbtnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstbtnFirstActionPerformed
-         this.index = 0;
+        // TODO add your handling code here:
+        this.index = 0;
         this.edit();
     }//GEN-LAST:event_btnFirstbtnFirstActionPerformed
 
     private void btnPrevbtnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevbtnPrevActionPerformed
+        // TODO add your handling code here:
         this.index--;
         this.edit();
     }//GEN-LAST:event_btnPrevbtnPrevActionPerformed
 
     private void btnNextbtnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextbtnNextActionPerformed
+        // TODO add your handling code here:
         this.index++;
         this.edit();
     }//GEN-LAST:event_btnNextbtnNextActionPerformed
 
     private void btnLastbtnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastbtnLastActionPerformed
+        // TODO add your handling code here:
         this.index = tblGridView.getRowCount() - 1;
         this.edit();
     }//GEN-LAST:event_btnLastbtnLastActionPerformed
@@ -554,6 +545,22 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NhanVienJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
